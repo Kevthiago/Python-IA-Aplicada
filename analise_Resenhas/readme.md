@@ -1,47 +1,52 @@
 # Análise de Resenhas de Aplicativos com IA
 
-Este projeto realiza a análise automática de resenhas de aplicativos utilizando inteligência artificial através da **Groq API**. O código extrai informações das resenhas, as traduz para o português (quando necessário), classifica o sentimento e gera relatórios resumidos.
+Este projeto realiza a análise automática de resenhas de aplicativos utilizando inteligência artificial através da **API da Groq**. O script lê resenhas de um arquivo de texto, as envia para um modelo de IA para extrair dados estruturados (usuário, sentimento, etc.), e, por fim, gera relatórios consolidados em múltiplos formatos.
 
 ---
 
-## 🔹 Funcionalidades
+## Funcionalidades
 
 -   Leitura de resenhas a partir de um arquivo `.txt`.
--   Extração de informações estruturadas de cada resenha:
-    -   Usuário
-    -   Resenha original
-    -   Resenha em português (`resenha_pt`)
-    -   Avaliação (`Positiva`, `Negativa` ou `Neutra`)
--   Contagem automática de avaliações por categoria.
--   Consolidação de todas as resenhas em uma única string formatada.
--   Integração com a API Groq para processamento de linguagem natural.
+-   Integração com a API da Groq para processamento de linguagem natural.
+-   Extração de informações estruturadas de cada resenha em formato JSON:
+    -   `usuario`
+    -   `resenha original`
+    -   `resenha_pt` (tradução para português)
+    -   `avaliacao` (sentimento classificado como `Positiva`, `Negativa` ou `Neutra`)
+-   Contagem e resumo das avaliações por categoria.
+-   **📄 Geração de Arquivos:**
+    -   Cria um arquivo **`resenhas_analisadas.csv`** com todos os dados estruturados, ideal para análise em planilhas (Excel, Google Sheets) ou outras ferramentas de dados.
+    -   Cria um relatório de texto **`relatorio_analise.txt`** formatado para leitura, contendo o resumo da análise e os detalhes de cada resenha.
 
 ---
 
 ## 🛠️ Tecnologias e Dependências
 
 -   **Python 3.10+**
--   **Pandas:** Para manipulação e estruturação de dados.
--   **Groq:** Cliente oficial para interagir com a Groq API.
--   **Python-dotenv:** Para gerenciamento de variáveis de ambiente.
--   **JSON:** Para processamento de dados estruturados.
+-   **Pandas:** Para manipulação, estruturação e exportação dos dados para CSV.
+-   **Groq:** Cliente oficial para interagir com a API da Groq.
+-   **Python-dotenv:** Para gerenciamento de chaves de API e outras variáveis de ambiente.
 
 ---
 
-## ⚡ Estrutura do Projeto
+## Estrutura do Projeto
 
 ```bash
 .
 ├── .env                  # Arquivo com variáveis de ambiente (GROQ_API_KEY)
-├── groq_Connect.py       # Funções de integração com a Groq API
+├── groq_Connect.py       # Funções de integração com a API da Groq
 ├── main.py               # Script principal de análise
+├── resenhas_app_gpt.txt  # Arquivo de entrada com as resenhas (uma por linha)
 ├── README.md             # Este arquivo
-└── resenhas_app_gpt.txt  # Arquivo de entrada com as resenhas
+│
+└── # Arquivos gerados após a execução:
+    ├── resenhas_analisadas.csv  # [ARQUIVO GERADO] Planilha com dados completos
+    └── relatorio_analise.txt    # [ARQUIVO GERADO] Relatório de texto para leitura
 ```
 
 ---
 
-## 🚀 Como Usar
+## Como Usar
 
 ### Pré-requisitos
 
@@ -84,15 +89,20 @@ Este projeto realiza a análise automática de resenhas de aplicativos utilizand
 
 ---
 
-## 📊 Saída Esperada
+## Saída Esperada
 
-A execução do script exibirá no terminal:
+1. A execução do script exibirá no terminal:
 
--   A lista de resenhas carregadas do arquivo.
--   A resposta bruta do modelo de IA.
--   Uma lista de dicionários Python com os dados estruturados.
--   A contagem final de avaliações.
--   As resenhas unidas em uma única string.
+- Confirmação de carregamento do arquivo de resenhas.
+- A resposta JSON bruta recebida do modelo.
+- Um resumo da contagem de avaliações (Positivas, Negativas, Neutras).
+- Um relatório detalhado e formatado de cada resenha.
+
+2. Arquivos Gerados:
+   
+- Na pasta do projeto, você encontrará dois novos arquivos:
+    - resenhas_analisadas.csv: Uma planilha contendo as colunas usuario, resenha original, resenha_pt e avaliacao.
+    - relatorio_analise.txt: Um documento de texto com um resumo claro e a lista completa de todas as resenhas analisadas,        formatadas para fácil leitura.
 
 #### Exemplo de Saída:
 
@@ -108,14 +118,14 @@ Usuário: João, Resenha: Excelente app, Avaliação: Positiva | Usuário: Maria
 
 ---
 
-## ⚙️ Personalização
+## Personalização
 
--   **Alterar modelo ou parâmetros:** Ajuste `temperature`, `max_completion_tokens`, `top_p` e `reasoning_effort` diretamente no arquivo `groq_chat.py`.
+-   **Alterar modelo ou parâmetros:** Ajuste `temperature`, `max_completion_tokens`, `top_p` e `reasoning_effort` diretamente no arquivo `groq_Connect.py`.
 -   **Formato de saída JSON:** O prompt que define a estrutura do JSON pode ser modificado na variável `prompt` dentro do arquivo `main.py`.
 
 ---
 
-## 📝 Observações
+## Observações
 
 -   Certifique-se de que o arquivo de resenhas (`resenhas_app_gpt.txt`) esteja no mesmo diretório que o script principal.
 -   A qualidade da análise depende da consistência das resenhas fornecidas.
@@ -123,7 +133,7 @@ Usuário: João, Resenha: Excelente app, Avaliação: Positiva | Usuário: Maria
 
 ---
 
-## 🔗 Links Úteis
+## Links Úteis
 
 -   [Documentação da Groq API](https://console.groq.com/docs)
 -   [Documentação do pandas](https://pandas.pydata.org/docs/)
@@ -131,7 +141,7 @@ Usuário: João, Resenha: Excelente app, Avaliação: Positiva | Usuário: Maria
 
 ---
 
-## ✒️ Autor
+## Autor
 
 Este projeto foi desenvolvido por **Kevin Thiago**, estudante de Ciência da Computação.
 
@@ -139,6 +149,6 @@ Foi criado durante o curso **"Python: Inteligência Artificial Aplicada"**, como
 
 ---
 
-## 📜 Licença
+## Licença
 
 Este projeto está licenciado sob a Licença MIT.
