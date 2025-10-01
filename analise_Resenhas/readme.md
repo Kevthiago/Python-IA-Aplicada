@@ -14,7 +14,7 @@ Este projeto realiza a análise automática de resenhas de aplicativos utilizand
     -   `resenha_pt` (tradução para português)
     -   `avaliacao` (sentimento classificado como `Positiva`, `Negativa` ou `Neutra`)
 -   Contagem e resumo das avaliações por categoria.
--   ** Geração de Arquivos:**
+-   Geração de Arquivos:
     -   Cria um arquivo **`resenhas_analisadas.csv`** com todos os dados estruturados, ideal para análise em planilhas (Excel, Google Sheets) ou outras ferramentas de dados.
     -   Cria um relatório de texto **`relatorio_analise.txt`** formatado para leitura, contendo o resumo da análise e os detalhes de cada resenha.
 
