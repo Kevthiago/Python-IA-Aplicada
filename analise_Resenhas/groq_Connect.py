@@ -1,4 +1,4 @@
-# groq_chat.py
+# groq_Connect.py
 from groq import Groq
 from dotenv import load_dotenv
 import os
@@ -24,3 +24,4 @@ def gerar_texto_groq(prompt: str) -> str:
         stream=False,
     )
     return completion.choices[0].message.content.strip()
+
